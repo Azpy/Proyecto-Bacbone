@@ -18,9 +18,15 @@
     "categoria": "Negocios"
   },
   {
-    "id": "4",
-    "titulo": "Los heraldos negros",
-    "autor": "Cesar Vallejo",
-    "categoria": "Poesia"
+    "titulo": "test",
+    "autor": "testa",
+    "categoria": "testc",
+    "id": "e06a7f40-9f08-11e7-8d8f-0300b8c2b13c"
+  },
+  {
+    "titulo": "Titulo de libro",
+    "autor": "nuevo autor",
+    "categoria": "My categoria",
+    "id": "5c204430-9f09-11e7-ba68-117917f9a478"
   }
 ]

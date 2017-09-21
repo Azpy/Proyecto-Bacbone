@@ -5,6 +5,17 @@ var express = require('express'),
 
 var app = express(),
 	baseDeDatos = fs.readFileSync('./datos.json').toString();
+	
+function storeJson(fd) { 
+	fs.truncate("./datos.json", 0, function() {
+		debugger;
+    fs.writeFile("./datos.json", JSON.stringify(fd, null, 2), function (err) {
+        if (err) {
+            return console.log("Error writing file: " + err);
+        }
+    });
+});
+}
 
 var datos = JSON.parse(baseDeDatos);
 
@@ -53,6 +64,7 @@ app.post('/libros', function (req, res){
 	req.body.id = uuid.v1(4);
 
 	datos.push(req.body);
+	storeJson(datos);
 
 	res.send(200, {id: req.body.id});
 });
@@ -68,6 +80,8 @@ app.put('/libros/:id', function (req, res){
 			datos[i] = req.body;
 		}
 	}
+	
+	storeJson(datos);
 
 	res.send(200);
 });
@@ -86,9 +100,14 @@ app.delete('/libros/:id', function (req,res) {
 	}
 
 	datos.splice(elementoEliminar, 1);
+	
+	storeJson(datos);
 
 	res.send(200);
 	
 });
 
-app.listen(4000);
+app.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function() {
+	console.log("test:" + process.env.PORT + " " + process.env.IP)
+  console.log('The server is now running at https://proyecto-bacbone-junior.c9users.io/');
+} );
